@@ -26,7 +26,7 @@ function App() {
 	return (
 		<>
 			<h1>#todo</h1>
-			<Tabs />
+			<Tabs tab={tab} setTab={setTab} />
 			<Input tasks={tasks} setTasks={setTasks} />
 			<Active tasks={tasks} />
 			<GlobalStyle />
