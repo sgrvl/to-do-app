@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
 import Active from "./Active";
+import All from "./All";
+import Completed from "./Completed";
 import Input from "./Input";
 import Tabs from "./Tabs";
 
@@ -21,14 +23,31 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 	const [tasks, setTasks] = useLocalStorageState("tasks", []);
-	const [tab, setTab] = useState("Active");
+	const [done, setDone] = useLocalStorageState("done tasks", []);
+	const [tab, setTab] = useState("All"); //temporary, will set back to "All"
 
 	return (
 		<>
 			<h1>#todo</h1>
 			<Tabs tab={tab} setTab={setTab} />
 			<Input tasks={tasks} setTasks={setTasks} />
-			<Active tasks={tasks} />
+			{tab === "All" && <All tasks={tasks} done={done} />}
+			{tab === "Active" && (
+				<Active
+					tasks={tasks}
+					setTasks={setTasks}
+					setDone={setDone}
+					done={done}
+				/>
+			)}
+			{tab === "Completed" && (
+				<Completed
+					tasks={tasks}
+					setTasks={setTasks}
+					setDone={setDone}
+					done={done}
+				/>
+			)}
 			<GlobalStyle />
 		</>
 	);

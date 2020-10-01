@@ -11,23 +11,18 @@ const Tasks = styled.div`
 	}
 `;
 
-const Active = ({ tasks, setTasks, done, setDone }) => {
-	const onComplete = (index) => {
-		const newTasks = tasks.filter((t) => t !== tasks[index]);
-		setDone([...done, tasks[index]]);
-		setTasks(newTasks);
-	};
-
+const All = ({ tasks, done }) => {
 	return (
 		<Tasks>
 			{tasks.map((task, index) => (
 				<div key={"Task" + index}>
-					<input
-						type="checkbox"
-						name=""
-						id={index}
-						onClick={(e) => onComplete(e.target.id)}
-					/>
+					<input type="checkbox" name="" id={index} onClick={(e) => {}} />
+					<label htmlFor={index}>{task}</label>
+				</div>
+			))}
+			{done.map((task, index) => (
+				<div key={"Task" + index}>
+					<input type="checkbox" name="" id={index} onClick={(e) => {}} />
 					<label htmlFor={index}>{task}</label>
 				</div>
 			))}
@@ -35,4 +30,4 @@ const Active = ({ tasks, setTasks, done, setDone }) => {
 	);
 };
 
-export default Active;
+export default All;
