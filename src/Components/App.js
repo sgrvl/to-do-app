@@ -23,31 +23,16 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 	const [tasks, setTasks] = useLocalStorageState("tasks", []);
-	const [done, setDone] = useLocalStorageState("done tasks", []);
-	const [tab, setTab] = useState("All"); //temporary, will set back to "All"
+	const [tab, setTab] = useState("All");
 
 	return (
 		<>
 			<h1>#todo</h1>
 			<Tabs tab={tab} setTab={setTab} />
 			<Input tasks={tasks} setTasks={setTasks} />
-			{tab === "All" && <All tasks={tasks} done={done} />}
-			{tab === "Active" && (
-				<Active
-					tasks={tasks}
-					setTasks={setTasks}
-					setDone={setDone}
-					done={done}
-				/>
-			)}
-			{tab === "Completed" && (
-				<Completed
-					tasks={tasks}
-					setTasks={setTasks}
-					setDone={setDone}
-					done={done}
-				/>
-			)}
+			{tab === "All" && <All tasks={tasks} setTasks={setTasks} />}
+			{tab === "Active" && <Active tasks={tasks} setTasks={setTasks} />}
+			{tab === "Completed" && <Completed tasks={tasks} setTasks={setTasks} />}
 			<GlobalStyle />
 		</>
 	);

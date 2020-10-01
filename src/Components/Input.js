@@ -8,7 +8,11 @@ const StyledInput = styled.form`
 `;
 
 const Input = ({ tasks, setTasks }) => {
-	const [task, setTask] = useState("");
+	const [task, setTask] = useState({
+		status: false,
+		value: "",
+		timestamp: Date.now(),
+	});
 	return (
 		<StyledInput
 			onSubmit={(e) => {
@@ -20,8 +24,14 @@ const Input = ({ tasks, setTasks }) => {
 			<input
 				type="text"
 				placeholder="add details"
-				value={task}
-				onChange={(e) => setTask(e.target.value)}
+				value={task.value || ""}
+				onChange={(e) =>
+					setTask({
+						status: false,
+						value: e.target.value,
+						timestamp: Date.now(),
+					})
+				}
 			/>
 			<input type="submit" value="Add" />
 		</StyledInput>
