@@ -10,6 +10,11 @@ const Tasks = styled.div`
 	label {
 		user-select: none;
 	}
+
+	div {
+		display: flex;
+		text-align: left;
+	}
 `;
 
 const Active = ({ tasks, setTasks }) => {
