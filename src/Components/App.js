@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { createGlobalStyle } from "styled-components";
+import { Route, Switch } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import Active from "./Active";
 import All from "./All";
@@ -23,16 +24,23 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 	const [tasks, setTasks] = useLocalStorageState("tasks", []);
-	const [tab, setTab] = useState("All");
 
 	return (
 		<>
 			<h1>#todo</h1>
-			<Tabs tab={tab} setTab={setTab} />
+			<Tabs />
 			<Input tasks={tasks} setTasks={setTasks} />
-			{tab === "All" && <All tasks={tasks} setTasks={setTasks} />}
-			{tab === "Active" && <Active tasks={tasks} setTasks={setTasks} />}
-			{tab === "Completed" && <Completed tasks={tasks} setTasks={setTasks} />}
+			<Switch>
+				<Route exact path="/">
+					<All tasks={tasks} setTasks={setTasks} />
+				</Route>
+				<Route path="/active">
+					<Active tasks={tasks} setTasks={setTasks} />
+				</Route>
+				<Route path="/completed">
+					<Completed tasks={tasks} setTasks={setTasks} />
+				</Route>
+			</Switch>
 			<GlobalStyle />
 		</>
 	);

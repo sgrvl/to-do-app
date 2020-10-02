@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledTabs = styled.div`
 	font-weight: bold;
@@ -9,16 +10,18 @@ const StyledTabs = styled.div`
 	margin: 1rem 0;
 `;
 
-const Tab = styled.div`
+const Tab = styled(Link)`
 	text-align: center;
 	width: 100%;
 	padding: 1rem 0.5rem;
 	cursor: pointer;
 	user-select: none;
 	position: relative;
+	text-decoration: none;
+	color: inherit;
 
 	&::after {
-		position: ${(props) => (props.selected ? "absolute" : "relative")};
+		position: ${(props) => (props.isSelected ? "absolute" : "relative")};
 		width: 60%;
 		height: 2.5px;
 		bottom: 0;
@@ -29,16 +32,29 @@ const Tab = styled.div`
 	}
 `;
 
-const Tabs = ({ tab, setTab }) => {
+const Tabs = () => {
+	const [selected, setSelected] = useState("All");
 	return (
 		<StyledTabs>
-			<Tab selected={tab === "All"} onClick={() => setTab("All")}>
+			<Tab
+				isSelected={selected === "All"}
+				onClick={() => setSelected("All")}
+				to="/"
+			>
 				All
 			</Tab>
-			<Tab selected={tab === "Active"} onClick={() => setTab("Active")}>
+			<Tab
+				isSelected={selected === "Active"}
+				onClick={() => setSelected("Active")}
+				to="/active"
+			>
 				Active
 			</Tab>
-			<Tab selected={tab === "Completed"} onClick={() => setTab("Completed")}>
+			<Tab
+				isSelected={selected === "Completed"}
+				onClick={() => setSelected("Completed")}
+				to="/completed"
+			>
 				Completed
 			</Tab>
 		</StyledTabs>
