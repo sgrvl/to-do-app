@@ -6,7 +6,7 @@ const StyledTabs = styled.div`
 	font-weight: bold;
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid rgb(50, 50, 50);
+	border-bottom: 1px solid rgba(50, 50, 50, 0.5);
 	margin: 1rem 0;
 `;
 
@@ -21,13 +21,13 @@ const Tab = styled(Link)`
 	color: inherit;
 
 	&::after {
-		position: ${(props) => (props.isSelected ? "absolute" : "relative")};
+		position: ${(props) => (props.active ? "absolute" : "relative")};
 		width: 60%;
 		height: 2.5px;
 		bottom: 0;
 		left: 20%;
 		content: " ";
-		background: rgb(0, 102, 255);
+		background: #3080ed;
 		border-radius: 5px 5px 0 0;
 	}
 `;
@@ -37,21 +37,21 @@ const Tabs = () => {
 	return (
 		<StyledTabs>
 			<Tab
-				isSelected={selected === "All"}
+				active={selected === "All" ? 1 : 0}
 				onClick={() => setSelected("All")}
 				to="/"
 			>
 				All
 			</Tab>
 			<Tab
-				isSelected={selected === "Active"}
+				active={selected === "Active" ? 1 : 0}
 				onClick={() => setSelected("Active")}
 				to="/active"
 			>
 				Active
 			</Tab>
 			<Tab
-				isSelected={selected === "Completed"}
+				active={selected === "Completed" ? 1 : 0}
 				onClick={() => setSelected("Completed")}
 				to="/completed"
 			>
