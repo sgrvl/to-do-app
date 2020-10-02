@@ -11,7 +11,7 @@ const StyledInput = styled.form`
 		padding: 1rem 0.5rem;
 		border-radius: 10px;
 		border: 1px solid rgba(50, 50, 50, 0.5);
-		margin: 0.5rem;
+		margin-right: 0.5rem;
 	}
 
 	input[type="submit"] {
@@ -21,7 +21,7 @@ const StyledInput = styled.form`
 		border: none;
 		color: white;
 		cursor: pointer;
-		margin: 0.5rem;
+		margin-left: 0.5rem;
 		outline: none;
 	}
 `;

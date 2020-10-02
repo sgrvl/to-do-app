@@ -11,6 +11,7 @@ import Tabs from "./Tabs";
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Roboto', sans-serif;
+		box-sizing: border-box;
   }
 
   body {
@@ -18,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     color: rgb(50,50,50);
     width: 100%;
     margin: 0 auto;
+		padding: 0 0.5rem;
     text-align: center;
   }
 `;
