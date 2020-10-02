@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const StyledTabs = styled.div`
 	font-weight: bold;
@@ -33,27 +33,28 @@ const Tab = styled(Link)`
 `;
 
 const Tabs = () => {
-	const [selected, setSelected] = useState("All");
+	const location = useLocation();
+
 	return (
 		<StyledTabs>
 			<Tab
-				active={selected === "All" ? 1 : 0}
-				onClick={() => setSelected("All")}
+				active={location.pathname === "/" ? 1 : 0}
 				to="/"
+				replace={location.pathname === "/"}
 			>
 				All
 			</Tab>
 			<Tab
-				active={selected === "Active" ? 1 : 0}
-				onClick={() => setSelected("Active")}
+				active={location.pathname === "/active" ? 1 : 0}
 				to="/active"
+				replace={location.pathname === "/active"}
 			>
 				Active
 			</Tab>
 			<Tab
-				active={selected === "Completed" ? 1 : 0}
-				onClick={() => setSelected("Completed")}
+				active={location.pathname === "/completed" ? 1 : 0}
 				to="/completed"
+				replace={location.pathname === "/completed"}
 			>
 				Completed
 			</Tab>
