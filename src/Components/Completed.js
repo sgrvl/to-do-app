@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { onComplete } from "./utils";
 
 const Tasks = styled.div`
 	display: flex;
@@ -12,11 +13,6 @@ const Tasks = styled.div`
 `;
 
 const Completed = ({ tasks, setTasks }) => {
-	const onComplete = (index) => {
-		const newTasks = [...tasks];
-		newTasks[index].status = !newTasks[index].status;
-		setTasks(newTasks);
-	};
 	return (
 		<Tasks>
 			{tasks.map((task, index) => {
@@ -27,7 +23,7 @@ const Completed = ({ tasks, setTasks }) => {
 								type="checkbox"
 								name=""
 								id={index}
-								onChange={(e) => onComplete(e.target.id)}
+								onChange={(e) => onComplete(e.target.id, tasks, setTasks)}
 								defaultChecked
 							/>
 							<label htmlFor={index}>{task.value}</label>
