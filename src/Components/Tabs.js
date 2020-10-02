@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const StyledTabs = styled.div`
 	font-weight: bold;
@@ -8,6 +9,7 @@ const StyledTabs = styled.div`
 	justify-content: space-between;
 	border-bottom: 1px solid rgba(50, 50, 50, 0.5);
 	margin: 1rem 0;
+	position: relative;
 `;
 
 const Tab = styled(Link)`
@@ -16,20 +18,17 @@ const Tab = styled(Link)`
 	padding: 1rem 0.5rem;
 	cursor: pointer;
 	user-select: none;
-	position: relative;
 	text-decoration: none;
 	color: inherit;
+`;
 
-	&::after {
-		position: ${(props) => (props.active ? "absolute" : "relative")};
-		width: 60%;
-		height: 2.5px;
-		bottom: 0;
-		left: 20%;
-		content: " ";
-		background: #3080ed;
-		border-radius: 5px 5px 0 0;
-	}
+const Highlight = styled(motion.div)`
+	height: 3px;
+	width: 23.33%;
+	bottom: 0;
+	position: absolute;
+	background: #3080ed;
+	border-radius: 5px 5px 0 0;
 `;
 
 const Tabs = () => {
@@ -37,25 +36,24 @@ const Tabs = () => {
 
 	return (
 		<StyledTabs>
-			<Tab
-				active={location.pathname === "/" ? 1 : 0}
-				to="/"
-				replace={location.pathname === "/"}
-			>
+			<Highlight
+				animate={{
+					left: `${
+						location.pathname === "/"
+							? "5%"
+							: location.pathname === "/active"
+							? "38.33%"
+							: "71.66%"
+					}`,
+				}}
+			/>
+			<Tab to="/" replace={location.pathname === "/"}>
 				All
 			</Tab>
-			<Tab
-				active={location.pathname === "/active" ? 1 : 0}
-				to="/active"
-				replace={location.pathname === "/active"}
-			>
+			<Tab to="/active" replace={location.pathname === "/active"}>
 				Active
 			</Tab>
-			<Tab
-				active={location.pathname === "/completed" ? 1 : 0}
-				to="/completed"
-				replace={location.pathname === "/completed"}
-			>
+			<Tab to="/completed" replace={location.pathname === "/completed"}>
 				Completed
 			</Tab>
 		</StyledTabs>
