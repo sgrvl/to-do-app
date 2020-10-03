@@ -8,3 +8,8 @@ export const onDelete = (index, tasks, setTasks) => {
 	const newTasks = [...tasks].filter((t) => t !== tasks[index]);
 	setTasks(newTasks);
 };
+
+export const onDeleteAll = (tasks, setTasks) => {
+	const newTasks = [...tasks].filter((t) => !t.status);
+	setTasks(newTasks);
+};

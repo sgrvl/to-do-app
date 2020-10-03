@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { onComplete, onDelete } from "./utils";
+import { onComplete, onDelete, onDeleteAll } from "./utils";
 import { ReactComponent as Trash } from "./trash.svg";
 import { Checkbox, Button } from "@material-ui/core";
 import { motion, AnimatePresence } from "framer-motion";
@@ -92,7 +92,7 @@ const Completed = ({ tasks, setTasks }) => {
 				}
 				return null;
 			})}
-			<Delete variant="contained" onClick={() => setTasks([])}>
+			<Delete variant="contained" onClick={() => onDeleteAll(tasks, setTasks)}>
 				<Trash className="delete" />
 				&nbsp;delete all
 			</Delete>
