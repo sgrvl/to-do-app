@@ -21,15 +21,17 @@ const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
 		padding: 0 0.5rem;
     text-align: center;
+		overflow-x: hidden;
   }
 
-	.MuiCheckbox-colorSecondary.Mui-checked {
+	.MuiCheckbox-colorPrimary.Mui-checked {
 		color: #3080ed !important;
 	}
 
 	label {
 		user-select: none;
 		cursor: pointer;
+		position: relative;
 	}
 `;
 

@@ -20,6 +20,7 @@ const Tab = styled(Link)`
 	user-select: none;
 	text-decoration: none;
 	color: inherit;
+	font-weight: initial;
 `;
 
 const Highlight = styled(motion.div)`

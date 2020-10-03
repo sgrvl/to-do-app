@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { onComplete, onDelete } from "./utils";
 import { ReactComponent as Trash } from "./trash.svg";
 import { Checkbox, Button } from "@material-ui/core";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Tasks = styled.div`
 	display: flex;
@@ -10,7 +11,7 @@ const Tasks = styled.div`
 	align-items: flex-start;
 	margin: 1rem 0;
 
-	div {
+	.taskWrap {
 		display: flex;
 		align-items: center;
 		text-align: left;
@@ -46,19 +47,41 @@ const Delete = styled(Button)`
 	}
 `;
 
+const Cross = styled(motion.div)`
+	position: absolute;
+	content: " ";
+	height: 1px;
+	width: 100%;
+	background: black;
+	left: 0;
+	bottom: 50%;
+`;
+
 const Completed = ({ tasks, setTasks }) => {
 	return (
 		<Tasks>
 			{tasks.map((task, index) => {
 				if (task.status) {
 					return (
-						<div key={"Task" + index}>
+						<div className="taskWrap" key={"Task" + index}>
 							<Checkbox
 								checked={task.status}
 								id={`${index}`}
 								onChange={(e) => onComplete(e.target.id, tasks, setTasks)}
+								color="primary"
 							/>
-							<label htmlFor={index}>{task.value}</label>
+							<label htmlFor={index}>
+								<AnimatePresence>
+									{task.status && (
+										<Cross
+											initial={{ width: 0 }}
+											animate={{ width: "100%" }}
+											exit={{ width: 0, opacity: 0 }}
+										/>
+									)}
+								</AnimatePresence>
+								{task.value}
+							</label>
 							<Trash
 								className="trash"
 								id={index}
@@ -69,7 +92,7 @@ const Completed = ({ tasks, setTasks }) => {
 				}
 				return null;
 			})}
-			<Delete variant="contained">
+			<Delete variant="contained" onClick={() => setTasks([])}>
 				<Trash className="delete" />
 				&nbsp;delete all
 			</Delete>
