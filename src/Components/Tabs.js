@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const StyledTabs = styled.div`
 	font-weight: bold;
@@ -31,9 +31,7 @@ const Highlight = styled(motion.div)`
 	border-radius: 5px 5px 0 0;
 `;
 
-const Tabs = () => {
-	const location = useLocation();
-
+const Tabs = ({ location }) => {
 	return (
 		<StyledTabs>
 			<Highlight

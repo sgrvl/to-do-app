@@ -1,29 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { TextField, Button } from "@material-ui/core";
 
 const StyledInput = styled.form`
 	display: flex;
 	flex-grow: 1;
+`;
 
-	input[type="text"] {
-		outline: none;
-		width: 100%;
-		padding: 1rem 0.5rem;
-		border-radius: 10px;
-		border: 1px solid rgba(50, 50, 50, 0.5);
-		margin-right: 0.5rem;
-	}
+const Text = styled(TextField)`
+	width: 100% !important;
+	margin-right: 0.5rem !important;
+	outline-color: #3080ed !important;
+`;
 
-	input[type="submit"] {
-		min-width: 20%;
-		background: #3080ed;
-		border-radius: 10px;
-		border: none;
-		color: white;
-		cursor: pointer;
-		margin-left: 0.5rem;
-		outline: none;
-	}
+const Add = styled(Button)`
+	min-width: 20% !important;
+	background: #3080ed !important;
+	margin-left: 0.5rem;
+	color: white !important;
+	text-transform: inherit !important;
+	font-weight: inherit !important;
 `;
 
 const Input = ({ tasks, setTasks }) => {
@@ -46,9 +42,9 @@ const Input = ({ tasks, setTasks }) => {
 				});
 			}}
 		>
-			<input
-				type="text"
-				placeholder="add details"
+			<Text
+				variant="outlined"
+				label="add details"
 				value={task.value || ""}
 				onChange={(e) =>
 					setTask({
@@ -58,7 +54,9 @@ const Input = ({ tasks, setTasks }) => {
 					})
 				}
 			/>
-			<input type="submit" value="Add" />
+			<Add type="submit" variant="contained">
+				Add
+			</Add>
 		</StyledInput>
 	);
 };

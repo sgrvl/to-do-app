@@ -1,6 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import Active from "./Active";
 import All from "./All";
@@ -22,16 +22,28 @@ const GlobalStyle = createGlobalStyle`
 		padding: 0 0.5rem;
     text-align: center;
   }
+
+	.MuiCheckbox-colorSecondary.Mui-checked {
+		color: #3080ed !important;
+	}
+
+	label {
+		user-select: none;
+		cursor: pointer;
+	}
 `;
 
 function App() {
 	const [tasks, setTasks] = useLocalStorageState("tasks", []);
+	const location = useLocation();
 
 	return (
 		<>
 			<h1>#todo</h1>
-			<Tabs />
-			<Input tasks={tasks} setTasks={setTasks} />
+			<Tabs location={location} />
+			{(location.pathname === "/" || location.pathname === "/active") && (
+				<Input tasks={tasks} setTasks={setTasks} />
+			)}
 			<Switch>
 				<Route exact path="/">
 					<All tasks={tasks} setTasks={setTasks} />
